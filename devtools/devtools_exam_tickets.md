@@ -1083,6 +1083,7 @@ This is the Unix philosophy:
 __Centralized Workflow__
 
 ![](resources/centralized-workflow.png)
+
 Плюсы
 + Простота организации
 + Хранение репозитория в одном месте
