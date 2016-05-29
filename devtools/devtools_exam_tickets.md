@@ -104,18 +104,18 @@
   * Нужно заботиться о качестве кода тестов
   * Метафора тестов: скелет, позволяющий организму двигаться
 
-Классификация тестов: по назначению
+**Классификация тестов по назначению**
 
 * Функциональные требования
-  * На задымление (smoke)
+  * **На задымление (smoke)**
     Smoke Test (англ. Smoke testing, дымовое тестирование) в тестировании означает минимальный набор тестов на явные ошибки. Дымовой тест обычно выполняется самим программистом; не проходящую этот тест программу не имеет смысла отдавать на более глубокое тестирование.
     Smoke test - быстрое и грубое тестирование кода сразу после внесения в него правок. П поводу происхождения термина 
-  * Регрессионные (regression)
+  * **Регрессионные (regression)**
     Регрессионное тестирование - это вид тестирования, направленный на проверку изменений, сделанных в приложении или окружающей среде (починка дефекта, слияние кода, миграция на другую операционную систему, базу данных, веб сервер или сервер приложения), для подтверждения того факта, что существующая ранее функциональность работает как и прежде (см. также Санитарное тестирование или проверка согласованности/исправности).
-  * На точность (accuracy)
-  * Соответствие/совместимость (conformance/compliance)
-  * Приемочные (acceptance)
-  * Приемочное тестирование или Приемо-сдаточное испытание (Acceptance Testing). Формальный процесс тестирования, который проверяет соответствие системы требованиям и проводится с целью:
+  * **На точность (accuracy)**
+  * **Соответствие/совместимость (conformance/compliance)**
+  * **Приемочные (acceptance)**
+    Приемочное тестирование или Приемо-сдаточное испытание (Acceptance Testing). Формальный процесс тестирования, который проверяет соответствие системы требованиям и проводится с целью:
     * Определения удовлетворяет ли система приемочным критериям;
     * Вынесения решения заказчиком или другим уполномоченным лицом принимается приложение или нет.
     Приемочное тестирование выполняется на основании набора типичных тестовых случаев и сценариев, разработанных на основании требований к данному приложению. 
@@ -123,16 +123,16 @@
     * Продукт достиг необходимого уровня качества;
     * Заказчик ознакомлен с Планом Приемочных Работ (Product Acceptance Plan) или иным документом, где описан набор действий, связанных с проведением приемочного тестирования, дата проведения, ответственные и т.д.
     * Фаза приемочного тестирования длится до тех пор, пока заказчик не выносит решение об отправлении приложения на доработку или выдаче приложения.
-  * Функциональные (functional)
+  * **Функциональные (functional)**
     Тесты, проверяющие функуиональные требования
 * Нефункциональные требования
-  * На производительность (performance)
+  * **На производительность (performance)**
     Тестирование, которое проводится с целью определения, как быстро работает вычислительная система или её часть под определённой нагрузкой. Также может служить для проверки и подтверждения других атрибутов качества системы, таких как масштабируемость, надёжность и потребление ресурсов.
-  * Стресс (stress)
+  * **Стресс (stress)**
     Стресс-тестирование обычно используется для понимания пределов пропускной способности приложения. Этот тип тестирования проводится для определения надёжности системы во время экстремальных или диспропорциональных нагрузок и отвечает на вопросы о достаточной производительности системы в случае, если текущая нагрузка сильно превысит ожидаемый максимум.
-  * Нагрузочные (load)
+  * **Нагрузочные (load)**
     Нагрузочное тестирование — это простейшая форма тестирования производительности. Нагрузочное тестирование обычно проводится для того, чтобы оценить поведение приложения под заданной ожидаемой нагрузкой. Этой нагрузкой может быть, например, ожидаемое количество одновременно работающих пользователей приложения, совершающих заданное число транзакций за интервал времени. Такой тип тестирования обычно позволяет получить время отклика всех самых важных бизнес-транзакций. В случае наблюдения за базой данных, сервером приложений, сетью и т. д., этот тип тестирования может также идентифицировать некоторые узкие места приложения.
-  * Качество кода (code quality)
+  * **Качество кода (code quality)**
     Скрипт, проверяющий код на GitHub в нашем репозитории
 
 **TXT:**
@@ -1221,31 +1221,93 @@ __Git Flow__
 - "Собственный" язык
 - Поначалу кажется нетривиальным
 
-__Возможности__:
-Указание необходимой версии cmake. Писать эту команду всегда - хороший стиль
+__Возможности:__
+
+**Указание необходимой версии cmake.**
+
+Писать эту команду всегда - хороший стиль
 ```
 cmake_minimum_required(VERSION 2.6)
 ```
-Название проекта. Указывает, что этот cmake-файл является корневым для некоторого проекта.
+**Название проекта.**
+
+Указывает, что этот cmake-файл является корневым для некоторого проекта.
 ```
 project(visualization)
 ```
-Переменные
+**Adding a Directory to your Header Search Paths**
+
+To add a header search path, use the `include_directories` command. For example:
+```
+include_directories( ../external/boost/ )
+```
+**Adding a Directory to your Library Search Paths**
+
+Same syntax as above, but use the `link_directories` command instead:
+```
+link_directories( ../external/libcinder/libs/ )
+```
+**Linking To Third-Party Libraries**
+
+To link to a third-party library, you first need to add the library to your project as if it were a library you are building yourself. You can do this with the `add_library` command:
+```
+add_library( libcinder STATIC IMPORTED )
+```
+The third argument is the most important here - it tells CMake that this library is pre-built, and that there are therefore no sources to specify.
+
+Once you’ve defined the library, you then have to tell CMake where the prebuilt library is located. This can be done by setting the `IMPORTED_LOCATION` property on your new library:
+```
+set_property( TARGET libcinder PROPERTY IMPORTED_LOCATION libcinder.a )
+```
+Now that you have defined your library, you can then have your executable target it by using the `target_link_libraries` command:
+```
+add_executable( AwesomeDemo ${ SOURCE_FILES } )
+target_link_libraries( AwesomeDemo libcinder )
+```
+**Specifying Different Debug and Release Libraries**
+
+Is is pretty likely that your third-party vendor has supplied different debug and release builds of their libraries. Here is an example of how to express this in CMake:
+```
+add_library( libcinder_d STATIC IMPORTED )
+add_library( libcinder STATIC IMPORTED )
+
+set_property( TARGET libcinder_d PROPERTY IMPORTED_LOCATION libcinder_d.a )
+set_property( TARGET libcinder PROPERTY IMPORTED_LOCATION libcinder.a )
+
+add_executable( AwesomeDemo ${ SOURCE_FILES } )
+target_link_libraries( AwesomeDemo debug libcinder_d optimized libcinder )
+```
+What we’ve basically done here is define both external libraries. Then, when calling the `target_link_libraries` command we can use the `debug` and `optimized` keywords to specify the two versions accordingly.
+
+**How To Access Environment Variables**
+
+Environment variables can be accessed via the ENV CMake variable, for example:
+```
+include_directories( $ENV{ MAYA_PATH }/devkit/include )
+```
+**How to detect Apple, Windows, and Linux**
+
+If you need to add platform specific commands to your CMakeLists then you can use the following syntax:
+```
+IF (APPLE)
+    # Add your apple commands here
+ENDIF ( )
+
+IF (WIN32)
+    # Add your windows commands here
+ENDIF ( )
+
+IF (UNIX)
+    # Add your unix commands here
+ENDIF ( )
+```
+**Переменные**
 ```
 set(VARIABLE The variable's value)
 ```
-Команды компилятору
+**Команды компилятору**
 ```
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
-```
-Подключение библиотек
-```
-set(Boost_USE_STATIC_LIBS OFF)
-set(Boost_USE_MULTITHREADED ON)
-```
-Подключение заголовков
-```
-include_directories("headers/" "more_headers/")
 ```
 
 #### 13.1. Современная стратегия тестирования (включая распределение ролей и инструментальную поддержку).
